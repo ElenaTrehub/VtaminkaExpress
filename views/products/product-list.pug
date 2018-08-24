@@ -1,0 +1,36 @@
+extends ../layout
+
+block content
+    script( defer src="/javascripts/product.js" )
+
+    //a.btn.btn-primary.col-12(href="/panel/category/new") Добавить категорию
+
+    if products.length === 0
+        .alert.alert-info.col-12
+            | Продукты не найдены
+    else
+        table.table
+            thead
+                tr(align="middle")
+                    th(scope='col') #
+                    th(scope='col') Название
+                    th(scope='col') Категория
+                    th(scope='col') Цена
+                    th(scope='col') Описание
+
+            tbody
+                each product in products
+                    tr(align="middle")
+                        td= product.productID
+                        td= product.productTitle
+                        td= product.categoryID
+                        td= product.productPrice
+                        td= product.productDescription
+                        td
+                            a.alert.alert-primary(href="/panel/category/"+category.categoryID style="display: inline-block;") Изменить
+                        td
+                            button.alert.alert-danger(
+                            style="cursor: pointer"
+                            data-category-title=category.categoryTitle
+                            data-category-id=category.categoryID
+                            ) Удалить
